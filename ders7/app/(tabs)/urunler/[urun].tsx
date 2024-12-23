@@ -23,9 +23,9 @@ const index = () => {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
       <Text>{veri.title}</Text>
       <Image source={{ uri: veri.thumbnail }} style={{ width: '100%', height: 300 }} />
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flex:'1',flexDirection: 'row' }}>
+        <Text>{(veri.price-((veri.price*veri.discountPercentage)/100)).toFixed(2)}$</Text>
         <Text>{veri.price}</Text>
-        <Text>{veri.discountPercentage}</Text>
       </View>
     </View>
   )
