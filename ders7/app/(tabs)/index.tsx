@@ -1,13 +1,17 @@
-import { Image, StyleSheet, Platform ,TextInput,View,Text} from 'react-native';
-
+import { Image, StyleSheet, Platform, TextInput, View, Text } from 'react-native';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function HomeScreen() {
   const [fiyat, setFiyat] = useState('');
+  const [isNegative, setIsNegative] = useState(false);
+
+  useEffect(() => {
+    setIsNegative(parseFloat(fiyat) < 0);
+  }, [fiyat]);
 
   const hesapla = (text: string) => {
     setFiyat(text);
@@ -22,31 +26,33 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, isNegative && styles.inputNegative]}
         placeholder="Fiyat Giriniz"
         keyboardType='numeric'
         onChangeText={hesapla}
         value={fiyat}
       />
-      <Text style={styles.result}>{calculatePercentage(fiyat)}</Text>
+      <Text>%20 Fazlası: {calculatePercentage(fiyat)}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'white',
-    paddingTop: 50,
-
+    backgroundColor: '#fff',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   input: {
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    width: '80%',
   },
-  result: {
-    fontSize: 18,
+  inputNegative: {
+    borderColor: 'red',
   },
 });
