@@ -3,7 +3,7 @@ import React from 'react'
 import { useLocalSearchParams } from 'expo-router'
 
 const index = () => {
-  const product=useLocalSearchParams()
+  const {product}=useLocalSearchParams()
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor:'white' }}>
       <Text>{product}</Text>
