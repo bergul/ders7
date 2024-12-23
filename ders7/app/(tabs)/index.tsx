@@ -7,10 +7,10 @@ import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
 
 export default function HomeScreen() {
-  const [value, setValue] = useState('');
+  const [fiyat, setFiyat] = useState('');
 
-  const handleChange = (text: string) => {
-    setValue(text);
+  const hesapla = (text: string) => {
+    setFiyat(text);
   };
 
   const calculatePercentage = (input: string) => {
@@ -23,12 +23,12 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Enter a number"
-        keyboardType="numeric"
-        onChangeText={handleChange}
-        value={value}
+        placeholder="Fiyat Giriniz"
+        keyboardType='numeric'
+        onChangeText={hesapla}
+        value={fiyat}
       />
-      <Text style={styles.result}>{calculatePercentage(value)}</Text>
+      <Text style={styles.result}>{calculatePercentage(fiyat)}</Text>
     </View>
   );
 }
@@ -36,7 +36,8 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor:'white',
-    padding: 16,
+    paddingTop: 50,
+
   },
   input: {
     height: 40,
