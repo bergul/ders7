@@ -2,10 +2,11 @@ import { View, Text, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import axios from 'axios'
-import { useSearchParams } from 'expo-router/build/hooks'
+import { useGlobalSearchParams, useSearchParams } from 'expo-router/build/hooks'
 
 const index = () => {
-  const {product} = useSearchParams();
+  const searchParams = useSearchParams();
+  const product = searchParams.get('urun');
   const [veri, setVeri] = useState({});
   useEffect(() => {
 
