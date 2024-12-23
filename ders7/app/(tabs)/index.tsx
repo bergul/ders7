@@ -4,6 +4,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState, useEffect } from 'react';
+import { Link } from 'expo-router';
 
 export default function HomeScreen() {
   const [fiyat, setFiyat] = useState('');
@@ -33,6 +34,7 @@ export default function HomeScreen() {
         value={fiyat}
       />
       <Text>%20 Fazlası: {calculatePercentage(fiyat)}</Text>
+      <Link href="/(tabs)/urunler/1">Git</Link>
     </View>
   );
 }
