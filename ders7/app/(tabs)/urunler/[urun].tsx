@@ -20,12 +20,12 @@ const index = () => {
 
   }, [veri]);
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white',padding:50 }}>
       <Text>{veri.title}</Text>
       <Image source={{ uri: veri.thumbnail }} style={{ width: '100%', height: 300 }} />
-      <View style={{ flex:'1',flexDirection: 'row' }}>
-        <Text>{(veri.price-((veri.price*veri.discountPercentage)/100)).toFixed(2)}$</Text>
-        <Text>{veri.price}</Text>
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={{fontSize:24,fontWeight:900}}>{(veri.price-((veri.price*veri.discountPercentage)/100)).toFixed(2)}$</Text>
+        <Text style={{fontSize:21,textDecorationLine:'line-through'}}>{veri.price}</Text>
       </View>
     </View>
   )
