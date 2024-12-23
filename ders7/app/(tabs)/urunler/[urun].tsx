@@ -2,22 +2,23 @@ import { View, Text, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import axios from 'axios'
+import { useSearchParams } from 'expo-router/build/hooks'
 
 const index = () => {
-  const {product}=useLocalSearchParams();
-  const [veri, setVeri] = useState('');
+  const {product} = useSearchParams();
+  const [veri, setVeri] = useState({});
   useEffect(() => {
 
     axios.get(`https://dummyjson.com/products/${product}`)
       .then(res => {
         const data = res.data;
         setVeri(data);
-      })  
+      })
 
 
-  }, [product]);
+  }, [veri]);
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor:'white' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
       <Text>{JSON.stringify(veri)}</Text>
     </View>
   )
