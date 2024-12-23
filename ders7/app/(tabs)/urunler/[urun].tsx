@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import axios from 'axios'
 import { useGlobalSearchParams, useSearchParams } from 'expo-router/build/hooks'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const index = () => {
   const searchParams = useSearchParams();
@@ -19,6 +20,21 @@ const index = () => {
       })
   }, [product]);
 
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <Icon
+          key={i}
+          name="star"
+          size={20}
+          color={i <= rating ? 'gold' : 'gray'}
+        />
+      );
+    }
+    return stars;
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{veri.title}</Text>
@@ -33,10 +49,11 @@ const index = () => {
         keyExtractor={(item) => item.reviewerEmail}
         renderItem={({ item }) => (
           <View style={styles.review}>
-             <Text style={styles.reviewText}>{item.rating}</Text>
+            <View style={styles.starsContainer}>
+              {renderStars(item.rating)}
+            </View>
             <Text style={styles.reviewText}>{item.comment}</Text>
             <Text style={styles.reviewText}>{item.reviewerName}</Text>
-            <Text style={styles.reviewText}>{item.reviewerEmail}</Text>
           </View>
         )}
       />
@@ -69,6 +86,9 @@ const styles = StyleSheet.create({
   },
   reviewText: {
     fontSize: 14,
+  },
+  starsContainer: {
+    flexDirection: 'row',
   },
 });
 
