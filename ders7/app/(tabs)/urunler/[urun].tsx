@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, Image, FlatList } from 'react-native'
+import { View, Text, StyleSheet, Image, FlatList, Dimensions, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import axios from 'axios'
 import { useGlobalSearchParams, useSearchParams } from 'expo-router/build/hooks'
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+const { width: viewportWidth } = Dimensions.get('window');
 
 const index = () => {
   const searchParams = useSearchParams();
@@ -35,12 +37,29 @@ const index = () => {
     return stars;
   };
 
+  if (!veri || !veri.images) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{veri.title}</Text>
-      <Image source={{ uri: veri.thumbnail }} style={styles.image} />
-      <Text style={{fontSize:24,fontWeight:900}}>{(veri.price-(veri.price*veri.discountPercentage)/100).toFixed(2)}</Text>
-      <Text style={{textDecorationLine:'line-through'}}>{veri.price}</Text>
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        style={styles.scrollView}
+      >
+        {veri.images.map((image, index) => (
+          <Image key={index} source={{ uri: image }} style={styles.image} />
+        ))}
+      </ScrollView>
+      <Text style={{fontSize:24,fontWeight:900}}>
+        {(veri.price - (veri.price * veri.discountPercentage) / 100).toFixed(2)}
+      </Text>
+      <Text style={{textDecorationLine:'line-through'}}>
+        {veri.price}
+      </Text>
       <Text style={styles.description}>{veri.description}</Text>
       <Text style={styles.title}>Details</Text>
       <Text style={styles.title}>Reviews</Text> 
@@ -70,8 +89,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+  scrollView: {
+    marginVertical: 16,
+  },
   image: {
-    width: '100%',
+    width: viewportWidth,
     height: 200,
     resizeMode: 'cover',
   },
