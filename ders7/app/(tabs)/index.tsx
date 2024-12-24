@@ -34,9 +34,9 @@ export default function HomeScreen() {
         value={fiyat}
       />
       <Text>%20 Fazlası: {calculatePercentage(fiyat)}</Text>
-      <Link href="/(tabs)/urunler/1">Git</Link>
-      <Link href="/(tabs)/urunler/2">Git</Link>
-      <Link href="/(tabs)/urunler/3">Git</Link>
+      <Link href="/(tabs)/urunler/5">Git</Link>
+      <Link href="/(tabs)/urunler/6">Git</Link>
+      <Link href="/(tabs)/urunler/7">Git</Link>
     </View>
   );
 }
