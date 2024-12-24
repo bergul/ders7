@@ -44,16 +44,17 @@ const index = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{veri.title}</Text>
-      <ScrollView
+      <FlatList
+        data={veri.images}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <Image source={{ uri: item }} style={styles.image} />
+        )}
         style={styles.scrollView}
-      >
-        {veri.images.map((image, index) => (
-          <Image key={index} source={{ uri: image }} style={styles.image} />
-        ))}
-      </ScrollView>
+      />
       <Text style={{fontSize:24,fontWeight:900}}>
         {(veri.price - (veri.price * veri.discountPercentage) / 100).toFixed(2)}
       </Text>
