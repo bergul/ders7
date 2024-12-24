@@ -1,10 +1,9 @@
-import { View, Text, StyleSheet, Image, FlatList, Dimensions, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Image, FlatList, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useLocalSearchParams } from 'expo-router'
 import axios from 'axios'
-import { useGlobalSearchParams, useSearchParams } from 'expo-router/build/hooks'
+import { useSearchParams } from 'expo-router/build/hooks'
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import ImageSlider from 'react-native-image-slider'; // Add this import
 const { width: viewportWidth } = Dimensions.get('window');
 
 const index = () => {
@@ -44,17 +43,7 @@ const index = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{veri.title}</Text>
-      <FlatList
-        data={veri.images}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <Image source={{ uri: item }} style={styles.image} />
-        )}
-        style={styles.scrollView}
-      />
+      <ImageSlider images={veri.images} style={styles.image} />
       <Text style={{fontSize:24,fontWeight:900}}>
         {(veri.price - (veri.price * veri.discountPercentage) / 100).toFixed(2)}
       </Text>
